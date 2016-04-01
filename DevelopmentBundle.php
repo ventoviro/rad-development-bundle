@@ -10,6 +10,8 @@ namespace DevelopmentBundle;
 
 include_once __DIR__ . '/vendor/autoload.php';
 
+define('DEVELOPMENT_BUNDLE_ROOT', __DIR__);
+
 /**
  * The DevelopmentBundle class.
  *

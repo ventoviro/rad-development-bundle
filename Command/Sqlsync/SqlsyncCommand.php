@@ -58,7 +58,7 @@ class SqlsyncCommand extends Command
 
 		define('SQLSYNC_PROFILE',  SQLSYNC_RESOURCE);
 
-		define('SQLSYNC_LIB',      JPATH_LIBRARIES . '/windwalker/src/Sqlsync');
+		define('SQLSYNC_LIB',      DEVELOPMENT_BUNDLE_ROOT . '/Sqlsync');
 
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
