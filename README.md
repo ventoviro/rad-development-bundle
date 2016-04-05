@@ -196,8 +196,134 @@ php bin/windwalker sql export --all -y
 
 This operations can support `export` / `import` both commands.
 
+### Rename Column
 
+Modify `From` property in your schema files.
 
+``` yaml
+columns:
+  oldname: { Field: newname, ... , From: [oldname, oldname2] }
+```
 
+All oldnames in `From` property will convert to `newname`
+
+> Currently Sqlsync are weak on column name change, try avoid to do this operation.
+
+### Export & Import Hooks
+
+Add these files to profile folder.
+
+``` php
+pre-export.php
+post-export.php
+pre-import.php
+post-import.php
+```
+
+And simply write your script to do something.
+
+``` php
+// resources/sqlsync/default/pre-import.php
+
+if (!JFactory::getConfig()->get('debug'))
+{
+    throw new \Exception('STOP import, please enable debug mode to do any DB operations.');
+}
+
+```
+
+## Seeder
+
+Windwalker Developement Bundle provides a simple seeder and faker tools to help you generate fake data.
+
+Open `resources/seeders/DatabaseSeeder.php`, you will see `DatabaseSeeder` default class:
+
+Add a new seeder class at `resources/seeders/ProductSeeder.php`
+
+``` php
+use Faker\Factory;
+use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
+
+class ProductSeeder extends \DevelopmentBundle\Seeder\AbstractSeeder
+{
+	public function doExecute()
+	{
+		$faker = Factory::create();
+		$mapper = new DataMapper('#__mycomponent_products');
+		$categories = (new DataMapper('#__categories'))->findColumn('id', ['extension' => 'com_mycomponent']);
+		$userIds = (new DataMapper('#__users'))->id;
+
+		foreach (range(1, 200) as $i)
+		{
+			$data = new Data;
+			
+			$user_id = JFactory::getUser()->id;
+
+			$data['catid']        = $faker->randomElement($categories);
+			$data['title']        = $faker->sentence(rand(3, 5));
+			$data['alias']        = JFilterOutput::stringURLSafe($data['title']);
+			$data['temperature']  = $faker->randomElement(['normal', 'refrigeration', 'freeze']);
+			$data['price']        = rand(5000, 10000)/100;
+			$data['location']     = $faker->country;
+			$data['description']  = $faker->paragraph(5);
+			$data['image']        = $faker->imageUrl();
+			$data['state']        = $faker->randomElement([1, 1, 1, 1, 1, 0]);
+			$data['created']      = $faker->dateTimeThisMonth->format('Y-m-d H:i:s');
+			$data['created_by']   = $faker->randomElement($userIds);
+			$data['modified']     = $faker->dateTimeThisMonth->format('Y-m-d H:i:s');
+			$data['modified_by']  = $faker->randomElement($userIds);
+			$data['params']       = '';
+
+			$mapper->createOne($data);
+
+			$this->command->out('.', false);
+		}
+
+		$this->command->out();
+	}
+	
+	public function doClear()
+	{
+		$this->truncate('#__mycomponent_products');
+	}
+}
+```
+
+And set this class to `DatabaseSeeder`, you must sort seeders by denpendencies.
+
+``` php
+// ...
+
+	public function doExecute()
+	{
+		$this->execute(new CategorySeeder);
+
+		$this->execute(new ProductSeeder);
+
+		$this->execute(new OrderSeeder);
+	}
+
+	public function doClear()
+	{
+		$this->clear(new CategorySeeder);
+
+		$this->clear(new ProductSeeder);
+
+		$this->clear(new OrderSeeder);
+	}
+```
+
+Now run seeder by:
+
+``` bash
+php bin/windwalker seed import
+```
+
+Or clear it
+
+``` bash
+php bin/windwalker seed export
+```
 
 
