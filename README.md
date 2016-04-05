@@ -1,5 +1,7 @@
 # Windwalker Joomla RAD Development Bundle
 
+Some helpful command line tools to operate database for development.
+
 ## Table of Content
 
 - [Sqlsync](#sql-sync)
