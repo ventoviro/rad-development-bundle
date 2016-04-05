@@ -1,5 +1,10 @@
 # Windwalker Joomla RAD Development Bundle
 
+## Table of Content
+
+- [Sqlsync](#sql-sync)
+- [Seeder](#seeder)
+
 ## Installation via Composer
 
 ``` bash
