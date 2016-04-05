@@ -65,5 +65,5 @@ table:
     '#__user_usergroup_map': all
     '#__usergroups': all
     '#__users': all
+    '#__utf8_conversion': all
     '#__viewlevels': all
-    '#__weblinks': all
