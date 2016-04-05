@@ -237,6 +237,9 @@ if (!JFactory::getConfig()->get('debug'))
     throw new \Exception('STOP import, please enable debug mode to do any DB operations.');
 }
 
+// Or do some advanced DB actions
+JFactory::getDbo()->setQuery('ALTER TABLE ...')->execute();
+
 ```
 
 ## Seeder
