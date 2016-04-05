@@ -9,8 +9,8 @@
 
 namespace DevelopmentBundle\Sqlsync\Helper;
 
-use Joomla\Filesystem\Folder;
 use DevelopmentBundle\Sqlsync\Factory;
+use Windwalker\Filesystem\Folder;
 
 /**
  * Class ProfileHelper
@@ -48,7 +48,7 @@ abstract class ProfileHelper
 	 */
 	public static function getAllProfiles()
 	{
-		return Folder::folders(SQLSYNC_RESOURCE);
+		return Folder::folders(SQLSYNC_RESOURCE, false, Folder::PATH_BASENAME);
 	}
 
 	/**
