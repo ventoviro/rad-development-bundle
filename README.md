@@ -32,6 +32,19 @@ Windwalker Console - version: 2.1
 
 ## SQL Sync
 
+Windwalker Sqlsync is a powerful SQL compare & diff tools help developers update their SQL schema.
+
+### Why Not Migration Tools?
+
+Actually, we are developing a migration tools for Joomla & Windwalker now, but migration is not so fit Joomla CMS, sometimes 
+you will want to sync Joomla articles, modules, extensions and menus etc. to your production server. Migration tools are
+hard to do this. 
+
+So use Sqlsync tools, it helps you compare sql schema between your local & remote machine, simply run `export` in your local,
+and git track all schema files, then push your files to remote server and run `import`, all schema will update to remote.
+
+> Currently Sqlsync are weak on column name change, try avoid to do this operation.
+
 ### Export & Import SQL Schema
 
 ``` bash
@@ -128,7 +141,7 @@ There are 3 track rules:
 
 > All table which not list in track.yml will be `none`.
 
-## Sync Track Tables
+### Sync Track Tables
 
 If you installed a new component, there may be multiple tables added to ypur database, you can run:
 
@@ -138,7 +151,7 @@ php bin/windwalker sql table sync
 
 To auto add all non-tracked table to `track.yml`
 
-## Status
+### Status
 
 This command help you check table track information.
 
@@ -148,6 +161,40 @@ php bin/windwalker sql status
 
 ![p-2016-04-05-006](https://cloud.githubusercontent.com/assets/1639206/14274758/d143e078-fb45-11e5-9e53-c5967f94a5a9.jpg)
 
+### Profiles
+
+You can change profile by use
+
+``` bash
+# List profile
+php bin/windwalker sql profile
+
+# Create & checkout profile
+php bin/windwalker sql profile create test
+php bin/windwalker sql profile checkout test
+```
+
+Now you can export schema to other profile, this is very similar to git branches.
+
+### Quick import & export to profile
+
+You don't need to always checkout profiles, add profiles as arguments in commands.
+
+``` bash
+# Single profile
+php bin/windwalker sql export test
+
+# Multiple profiles
+php bin/windwalker sql export default foo bar test
+
+# Ignore checking prompt
+php bin/windwalker sql export default foo bar test -y
+
+# Export all profiles
+php bin/windwalker sql export --all -y
+```
+
+This operations can support `export` / `import` both commands.
 
 
 
