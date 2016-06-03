@@ -664,14 +664,7 @@ class YamlImporter extends AbstractImporter
 	 */
 	protected function getOldIndexes($table)
 	{
-		if (!empty($this->indexes[$table]))
-		{
-			return $this->indexes[$table];
-		}
-
-		$indexes = $this->db->setQuery("SHOW INDEX FROM `{$table}`")->loadAssocList();
-
-		return $this->indexes[$table] = $indexes;
+		return $this->db->setQuery("SHOW INDEX FROM `{$table}`")->loadAssocList();
 	}
 
 	/**
