@@ -73,4 +73,19 @@ abstract class AbstractImporter extends \JModelDatabase
 	 * @return mixed
 	 */
 	abstract public function import($content);
+
+	/**
+	 * getCharSet
+	 *
+	 * @return  string
+	 */
+	protected function getCharSet()
+	{
+		if (version_compare(JVERSION, '3.5.0', '>='))
+		{
+			return 'utf8mb4';
+		}
+
+		return 'utf8';
+	}
 }

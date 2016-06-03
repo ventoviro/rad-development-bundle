@@ -201,7 +201,9 @@ class YamlImporter extends AbstractImporter
 			$addColumns[] = "PRIMARY KEY (" . implode(', ', $primaryColumns) . ")";
 		}
 
-		$this->sql[] = $sql = "CREATE TABLE IF NOT EXISTS `{$name}` (\n  " . implode(",\n  ", $addColumns) . "\n) ENGINE=InnoDB DEFAULT CHARSET=utf8";
+		$charset = $this->getCharSet();
+		
+		$this->sql[] = $sql = "CREATE TABLE IF NOT EXISTS `{$name}` (\n  " . implode(",\n  ", $addColumns) . "\n) ENGINE=InnoDB DEFAULT CHARSET=$charset";
 
 		$this->execute($sql);
 
