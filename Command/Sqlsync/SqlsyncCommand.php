@@ -95,7 +95,7 @@ class SqlsyncCommand extends Command
 		
 		if (!in_array($database, $dbs))
 		{
-			$db->setQuery('CREATE DATABASE ' . $db->quoteName($database))->execute();
+			$db->setQuery('CREATE DATABASE `' . $database . '` CHARACTER SET `utf8`')->execute();
 		}
 
 		$db->disconnect();
