@@ -28,6 +28,7 @@ class Config extends Registry
 	{
 		parent::__construct($data);
 
+		// Workaround to fix Joomla 3.6.4 bug, @see https://github.com/ventoviro/rad-development-bundle/pull/10
 		$this->initialized = true;
 	}
 
