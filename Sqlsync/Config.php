@@ -18,6 +18,20 @@ use DevelopmentBundle\Sqlsync\Registry\Format\Json;
 class Config extends Registry
 {
 	/**
+	 * Constructor
+	 *
+	 * @param   mixed $data The data to bind to the new Registry object.
+	 *
+	 * @since   1.0
+	 */
+	public function __construct($data = null)
+	{
+		parent::__construct($data);
+
+		$this->initialized = true;
+	}
+
+	/**
 	 * Get a namespace in a given string format
 	 *
 	 * @param   string  $format   Format to return the string in
