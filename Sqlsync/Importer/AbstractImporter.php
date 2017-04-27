@@ -37,6 +37,11 @@ abstract class AbstractImporter extends \JModelDatabase
 	protected $rowCount = 0;
 
 	/**
+	 * @var bool
+	 */
+	protected $debug = false;
+
+	/**
 	 * getInstance
 	 *
 	 * @param string $type
@@ -75,17 +80,25 @@ abstract class AbstractImporter extends \JModelDatabase
 	abstract public function import($content);
 
 	/**
-	 * getCharSet
+	 * execute
 	 *
-	 * @return  string
+	 * @param string $sql
+	 *
+	 * @return bool|mixed
 	 */
-	protected function getCharSet()
+	protected function execute($sql)
 	{
-		if (version_compare(JVERSION, '3.5.0', '>='))
+		try
 		{
-			return 'utf8mb4';
+			return $this->debug ? false : $this->db->setQuery($sql)->execute();
 		}
-
-		return 'utf8';
+		catch (\RuntimeException $e)
+		{
+			throw new $e(
+				sprintf("%s\n\n[SQL]: %s", $e->getMessage(), $sql),
+				$e->getCode(),
+				$e
+			);
+		}
 	}
 }
