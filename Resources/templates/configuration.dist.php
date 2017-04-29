@@ -33,19 +33,24 @@ class JConfig
 	public $MetaTitle = '1';
 	public $MetaAuthor = '1';
 	public $MetaVersion = '0';
+	public $MetaRights = '';
+
+	// Timezone
+	public $offset = 'UTC';
 
 	// Mail
 	public $fromname = '__Site_Name__';
 	public $mailonline = '1';
 	public $mailer = 'mail';
-	public $mailfrom = 'service@the-allstars.com';
+	public $mailfrom = 'noreply@example.com';
 	public $sendmail = '/usr/sbin/sendmail';
-	public $smtpauth = '0';
+	public $smtpauth = '1';
 	public $smtpuser = '';
 	public $smtppass = '';
-	public $smtphost = 'localhost';
-	public $smtpsecure = 'none';
-	public $smtpport = '25';
+	public $smtphost = 'mailtrap.io';
+	public $smtpsecure = 'tls';
+	public $smtpport = '2525';
+	public $massmailoff = '0';
 
 	// SEF URL
 	public $sef = '1';
@@ -72,11 +77,10 @@ class JConfig
 	public $ftp_pass = '';
 	public $ftp_root = '';
 	public $ftp_enable = '0';
-	public $offset = 'Asia/Taipei';
 	public $robots = '';
 	public $feed_limit = '10';
 	public $feed_email = 'none';
-	public $lifetime = '15';
+	public $lifetime = '150';
 	public $session_handler = 'database';
 	public $memcache_persist = '1';
 	public $memcache_compress = '0';
@@ -96,8 +100,6 @@ class JConfig
 	public $proxy_port = '';
 	public $proxy_user = '';
 	public $proxy_pass = '';
-	public $massmailoff = '0';
-	public $MetaRights = '';
 	public $sitename_pagetitles = '0';
 	public $force_ssl = '0';
 	public $session_memcache_server_host = 'localhost';
