@@ -222,7 +222,7 @@ class YamlImporter extends AbstractImporter
 	{
 		$charset = ArrayHelper::getValue($table, 'charset', 'utf8mb4');
 		$collation = ArrayHelper::getValue($table, 'collation', 'utf8mb4_general_ci');
-		$sql = "ALTER TABLE `$name` CONVERT TO CHARACTER SET $charset collate $collation;";
+		$sql = "ALTER TABLE `$name` CONVERT TO CHARACTER SET $charset COLLATE $collation;";
 
 		$this->db->setQuery($sql)->execute();
 
@@ -381,7 +381,7 @@ class YamlImporter extends AbstractImporter
 
 		@$ai = $column['Extra'] === 'auto_increment' ? ' AUTO_INCREMENT' : '';
 
-		@$collation = $column['Collation'] ? 'COLLATE ' . $column['Collation'] : '';
+		@$collation = $column['Collation'] ? ' COLLATE ' . $column['Collation'] : '';
 
 		$comment = $column['Comment'] ? ' COMMENT ' . $this->db->quote($column['Comment']) : '';
 
@@ -492,7 +492,7 @@ class YamlImporter extends AbstractImporter
 			$this->dropIndex($tableName, $indexName);
 		}
 
-		if ($index['Key_name'] == 'PRIMARY')
+		if ($index['Key_name'] === 'PRIMARY')
 		{
 			$this->sql[] = $sql = "ALTER TABLE `{$tableName}` ADD PRIMARY KEY (" . implode(', ', $columns) . ")";
 		}
