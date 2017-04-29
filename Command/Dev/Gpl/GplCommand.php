@@ -6,7 +6,7 @@
  * @license    __LICENSE__
  */
 
-namespace DevelopmentBundle\Command\Validate\Gpl;
+namespace DevelopmentBundle\Command\Dev\Gpl;
 
 use Windwalker\Console\Command\Command;
 
@@ -29,7 +29,7 @@ class GplCommand extends Command
 	 *
 	 * @var  string
 	 */
-	protected $name = 'gpl';
+	protected $name = 'check-gpl';
 
 	/**
 	 * Property description.
@@ -43,7 +43,7 @@ class GplCommand extends Command
 	 *
 	 * @var  string
 	 */
-	protected $usage = 'gpl <cmd><path></cmd> <option>[options]</option>';
+	protected $usage = 'check-gpl <cmd><path></cmd> <option>[options]</option>';
 
 	/**
 	 * Property constants.

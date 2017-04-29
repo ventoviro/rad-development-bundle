@@ -6,7 +6,7 @@
  * @license    __LICENSE__
  */
 
-namespace DevelopmentBundle\Command\Validate\Indexmaker;
+namespace DevelopmentBundle\Command\Dev\Indexmaker;
 
 use Windwalker\Console\Command\Command;
 
@@ -23,12 +23,21 @@ class IndexmakerCommand extends Command
 	 * @var bool
 	 */
 	public static $isEnabled = true;
+
 	/**
 	 * Property name.
 	 *
 	 * @var  string
 	 */
-	public $name = 'index';
+	public $name = 'make-index';
+
+	/**
+	 * Property usage.
+	 *
+	 * @var  string
+	 */
+	protected $usage = 'make-index <cmd><path></cmd> <option>[options]</option>';
+
 	/**
 	 * Property description.
 	 *

@@ -6,7 +6,7 @@
  * @license    __LICENSE__
  */
 
-namespace DevelopmentBundle\Command\Validate\Constant;
+namespace DevelopmentBundle\Command\Dev\Constant;
 
 use Windwalker\Console\Command\Command;
 
@@ -29,7 +29,7 @@ class ConstantCommand extends Command
 	 *
 	 * @var  string
 	 */
-	protected $name = 'constant';
+	protected $name = 'check-jexec';
 
 	/**
 	 * Property description.
@@ -43,7 +43,7 @@ class ConstantCommand extends Command
 	 *
 	 * @var  string
 	 */
-	protected $usage = 'constant <cmd><path></cmd> <option>[options]</option>';
+	protected $usage = 'check-jexec <cmd><path></cmd> <option>[options]</option>';
 
 	/**
 	 * Property constants.
