@@ -1,22 +1,24 @@
 <?php
 /**
- * Part of joomlarad project.
+ * Part of rad project.
  *
  * @copyright  Copyright (C) 2017 ${ORGANIZATION}.
  * @license    __LICENSE__
  */
 
-namespace DevelopmentBundle\Command\User;
+namespace DevelopmentBundle\Command\Validate;
 
-use DevelopmentBundle\Command\User\Create\CreateCommand;
+use DevelopmentBundle\Command\Validate\Constant\ConstantCommand;
+use DevelopmentBundle\Command\Validate\Gpl\GplCommand;
+use DevelopmentBundle\Command\Validate\Indexmaker\IndexmakerCommand;
 use Windwalker\Console\Command\Command;
 
 /**
- * The UserCommand class.
+ * The CheckCommand class.
  *
  * @since  __DEPLOY_VERSION__
  */
-class UserCommand extends Command
+class ValidateCommand extends Command
 {
 	/**
 	 * An enabled flag.
@@ -30,31 +32,34 @@ class UserCommand extends Command
 	 *
 	 * @var  string
 	 */
-	protected $name = 'user';
+	protected $name = 'validate';
 
 	/**
 	 * The command description.
 	 *
 	 * @var  string
 	 */
-	protected $description = 'User operation.';
+	protected $description = 'Some useful checkers';
 
 	/**
 	 * The usage to tell user how to use this command.
 	 *
 	 * @var string
 	 */
-	protected $usage = 'user <cmd><command></cmd> <option>[option]</option>';
+	protected $usage = 'validate <cmd><command></cmd> <option>[option]</option>';
 
 	/**
 	 * Initialise command information.
 	 *
 	 * @return void
-	 * @throws \LogicException
 	 */
 	public function initialise()
 	{
-		$this->addCommand(new CreateCommand);
+		parent::initialise();
+
+		$this->addCommand(new IndexmakerCommand);
+		$this->addCommand(new ConstantCommand);
+		$this->addCommand(new GplCommand);
 	}
 
 	/**
@@ -64,6 +69,6 @@ class UserCommand extends Command
 	 */
 	protected function doExecute()
 	{
-		return parent::doExecute();
+		parent::doExecute();
 	}
 }
