@@ -87,16 +87,16 @@ class SeedCommand extends Command
 		{
 			list($type, $name, $group) = array_values(ExtensionHelper::extractElement($element));
 
-			if ($client == 'admin')
+			if ($client === 'admin')
 			{
 				$client = 'administrator';
 			}
 
-			if ($type == 'plugin')
+			if ($type === 'plugin')
 			{
 				$client = 'site';
 			}
-			elseif ($type == 'component')
+			elseif ($type === 'component')
 			{
 				$client = 'administrator';
 			}
@@ -106,11 +106,11 @@ class SeedCommand extends Command
 
 		$classPath = $path . '/' . $class . '.php';
 
-		if (!file_exists($classPath) && $element)
+		if (!file_exists($classPath) || $element)
 		{
 			$path = PathHelper::get($element, $client);
 
-			$classPath = $path . '/src/' . ucfirst($name) . '/Seed/' . $class . '.php';
+			$classPath = $path . '/seed/' . $class . '.php';
 		}
 
 		if (file_exists($classPath))
