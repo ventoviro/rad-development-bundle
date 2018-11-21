@@ -1,4 +1,8 @@
 table:
+    '#__action_log_config': all
+    '#__action_logs': cols
+    '#__action_logs_extensions': all
+    '#__action_logs_users': all
     '#__assets': all
     '#__associations': all
     '#__banner_clients': all
@@ -52,6 +56,8 @@ table:
     '#__newsfeeds': all
     '#__overrider': all
     '#__postinstall_messages': all
+    '#__privacy_consents': cols
+    '#__privacy_requests': cols
     '#__redirect_links': cols
     '#__schemas': all
     '#__session': cols
